@@ -1,6 +1,6 @@
 # HNNode - Hackernews via Node
 
-Just a proof of concept which uses the fine streamed feed from hnstream.com and filters it for mentions of a keyword.
+Just a proof of concept which uses the fine streamed feed from [hnstream.com](https://hnstream.com/) and filters it for mentions of a keyword.
 
 This project processes the live streaming of Hackernews comments from http://api.hnstream.com/comments/stream/, only keeps the comments which match the regex, adds sentiment, transforms the content to add links and other handy things, makes the comment slack friendly and finally post it on Slack.
 
