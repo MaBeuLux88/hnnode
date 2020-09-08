@@ -1,23 +1,20 @@
 {
-  "name": "hnnode",
+  "name": "hnmentions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
-    "@slack/client": "^4.8.0",
-    "entities": "^1.1.2",
-    "ndjson": "^1.5.0",
-    "request": "^2.88.0",
-    "sentiment": "^5.0.1",
-    "slackify-html": "git+https://github.com/codepope/slackify-html.git",
-    "through2": "^3.0.0",
-    "through2-filter": "^3.0.0",
-    "through2-spy": "^2.0.0",
-    "yargs": "^12.0.5"
+    "mongodb": "^3.6.1",
+    "ndjson": "^2.0.0",
+    "request": "^2.88.2",
+    "sentiment": "^5.0.2",
+    "through2": "^4.0.2",
+    "through2-filter": "^3.0.0"
   }
 }
