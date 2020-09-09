@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+    hnnode:
+        build: .
+        restart: always
+        environment:
+            ATLAS_URI: "mongodb+srv://<user>:<password>@cluster0-yyarb.mongodb.net/<dbname>?retryWrites=true&w=majority"
+            DATABASE_NAME: "hacker-news"
+            DATABASE_COLLECTION: mentions

@@ -15,19 +15,25 @@ const HN_API = "https://api.hnstream.com/comments/stream/";
     const textRank = new sentiment();
     try {
         await client.connect();
-        const collection = client.db("hacker-news").collection("mentions");
+        const collection = client.db(process.env["DATABASE_NAME"]).collection(process.env["DATABASE_COLLECTION"]);
         await pipeline(
+            // Request a response from the API
             request(HN_API),
+            // Parse the JSON objects that come back and drop the malformed
             ndjson.parse({ strict: false }),
+            // Filter any JSON objects that don't match the search criteria
             filter({ objectMode: true }, chunk => {
                 return chunk["body"].toLowerCase().includes("mongodb") || chunk["article-title"].toLowerCase().includes("mongodb");
             }),
+            // Create a sentiment analysis and add it to the original JSON object
             through2.obj((row, enc, next) => {
                 let result = textRank.analyze(row.body);
                 row.score = result.score;
                 next(null, row);
             }),
+            // Add the JSON object with sentiment analysis to MongoDB
             through2.obj((row, enc, next) => {
+                console.log(row);
                 collection.insertOne({
                     ...row,
                     "user-url": `https://news.ycombinator.com/user?id=${row["author"]}`,
@@ -36,6 +42,7 @@ const HN_API = "https://api.hnstream.com/comments/stream/";
                 next();
             })
         );
+        // This should never be reached
         console.log("FINISHED");
     } catch {
         console.log(error);
